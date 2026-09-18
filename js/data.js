@@ -60,7 +60,7 @@ const MENU_DATA = {
         id: 'drinks',
         label: 'Drinks',
         items: [
-          { id: 'a-soft-drink', name: 'Coke/Fanta/Sprite', price: 800 },
+          { id: 'a-soft-drink', name: 'Soft Drink', price: 800, options: ['Coke', 'Fanta', 'Sprite'] },
           { id: 'a-fresh-juice', name: 'Fresh Juice', price: 4000 },
           { id: 'a-water', name: 'Water', price: 500 }
         ]
@@ -141,7 +141,7 @@ const MENU_DATA = {
         id: 'drinks',
         label: 'Drinks',
         items: [
-          { id: 'l-soft-drink', name: 'Coke/Fanta/Sprite', price: 800 },
+          { id: 'l-soft-drink', name: 'Soft Drink', price: 800, options: ['Coke', 'Fanta', 'Sprite'] },
           { id: 'l-water', name: 'Water', price: 500 }
         ]
       }
