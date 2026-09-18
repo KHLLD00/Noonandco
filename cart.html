@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart — Noon & Co</title>
+<meta name="description" content="Review your order and send it to Noon & Co on WhatsApp for pickup or delivery.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo-mark.png" alt="Noon & Co">
+      Noon & Co
+    </a>
+    <ul class="nav-links">
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#reviews">Reviews</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-btn" aria-label="View cart">
+        Cart <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="cart-page-header">
+  <div class="wrap">
+    <h1>Your Cart</h1>
+  </div>
+</header>
+
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <div class="cart-layout">
+      <div>
+        <ul class="menu-list" id="cart-lines" style="list-style:none; padding:0; margin:0;"></ul>
+        <div class="empty-cart" id="empty-cart" style="display:none;">
+          Your cart is empty. <a href="menu.html">Browse the menu</a>
+        </div>
+      </div>
+
+      <div class="summary-card" id="summary-card">
+        <h3>Order summary</h3>
+
+        <div class="fulfillment-toggle">
+          <button class="active" data-fulfillment="pickup">Pickup</button>
+          <button data-fulfillment="delivery">Delivery</button>
+        </div>
+
+        <div class="field">
+          <label for="customer-name">Name</label>
+          <input type="text" id="customer-name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="customer-phone">Phone number</label>
+          <input type="tel" id="customer-phone" placeholder="080...">
+        </div>
+        <div class="field" id="address-field" style="display:none;">
+          <label for="customer-address">Delivery address</label>
+          <textarea id="customer-address" rows="2" placeholder="Street, area, city"></textarea>
+        </div>
+
+        <div class="summary-row">
+          <span>Items</span>
+          <span id="summary-count">0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="summary-total">₦0</span>
+        </div>
+
+        <div class="summary-actions">
+          <a href="#" class="btn-primary" id="whatsapp-checkout">Send order on WhatsApp</a>
+          <button class="btn-clear" id="clear-cart-btn">Clear cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="clear-modal">
+  <div class="modal-card">
+    <h3>Clear your cart?</h3>
+    <p>This removes every item you've added. This can't be undone.</p>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="clear-cancel">Cancel</button>
+      <button class="modal-confirm" id="clear-confirm">Clear cart</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <img src="assets/logo-mark.png" alt="" class="footer-mark">
+  <div class="wrap">
+    <span class="footer-copy">© 2026 Noon & Co. All rights reserved.</span>
+    <a href="https://instagram.com/noonandco.ng" class="footer-social">@noonandco.ng</a>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Noon & Co</title>
+<meta name="description" content="Full Noon & Co menu for Abuja and Lagos — meals, noodles, combos, sides, drinks, and party-size food bowls.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo-mark.png" alt="Noon & Co">
+      Noon & Co
+    </a>
+    <ul class="nav-links">
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#reviews">Reviews</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-btn" aria-label="View cart">
+        Cart <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="menu-header">
+  <div class="wrap">
+    <h1>Full Menu</h1>
+    <div class="city-toggle" role="group" aria-label="Choose city">
+      <button class="active" data-city="abuja">Abuja</button>
+      <button data-city="lagos">Lagos</button>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="menu-tabs" id="category-tabs"></div>
+    <p class="menu-note" id="category-note"></p>
+    <ul class="menu-list" id="menu-items"></ul>
+  </div>
+</section>
+
+<div class="cart-bar" id="cart-bar">
+  <div class="wrap cart-bar-inner">
+    <span id="cart-bar-summary">0 items · ₦0</span>
+    <a href="cart.html" class="btn-primary">View cart</a>
+  </div>
+</div>
+
+<footer>
+  <img src="assets/logo-mark.png" alt="" class="footer-mark">
+  <div class="wrap">
+    <span class="footer-copy">© 2026 Noon & Co. All rights reserved.</span>
+    <a href="https://instagram.com/noonandco.ng" class="footer-social">@noonandco.ng</a>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script src="js/data.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>
