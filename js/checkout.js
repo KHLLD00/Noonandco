@@ -13,7 +13,7 @@
   const receiptImage = document.getElementById('receipt-image');
 
   let fulfillment = 'pickup';
-  let receiptDataUrl = '';
+  let receiptBlobUrl = '';
 
   function renderLines() {
     const cart = getCart();
@@ -212,7 +212,7 @@
     ctx.font = '500 16px "Arial", sans-serif';
     ctx.fillText('Thank you for ordering from Noon & Co', width / 2, height - 38);
 
-    return canvas.toDataURL('image/png');
+    return canvas;
   }
 
   function wrapText(ctx, text, maxWidth) {
@@ -237,11 +237,21 @@
   }
 
   function openReceipt() {
-    receiptDataUrl = drawReceipt();
-    receiptImage.src = receiptDataUrl;
-    receiptModal.classList.add('visible');
-    receiptModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    const canvas = drawReceipt();
+
+    canvas.toBlob(blob => {
+      if (!blob) {
+        alert('Sorry, the receipt could not be generated. Please try again.');
+        return;
+      }
+
+      if (receiptBlobUrl) URL.revokeObjectURL(receiptBlobUrl);
+      receiptBlobUrl = URL.createObjectURL(blob);
+      receiptImage.src = receiptBlobUrl;
+      receiptModal.classList.add('visible');
+      receiptModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }, 'image/png');
   }
 
   function closeReceipt() {
@@ -300,9 +310,9 @@
   });
 
   document.getElementById('save-receipt').addEventListener('click', () => {
-    if (!receiptDataUrl) return;
+    if (!receiptBlobUrl) return;
     const link = document.createElement('a');
-    link.href = receiptDataUrl;
+    link.href = receiptBlobUrl;
     link.download = `noon-and-co-receipt-${Date.now()}.png`;
     link.click();
   });
