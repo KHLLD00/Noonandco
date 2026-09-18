@@ -64,6 +64,33 @@
           </li>`;
       }
 
+      if (item.options) {
+        const selected = item.options.find(option =>
+          cart.some(line => line.id === `${item.id}::${option}`)
+        ) || item.options[0];
+
+        const lineId = `${item.id}::${selected}`;
+        const line = cart.find(l => l.id === lineId);
+        const control = line
+          ? stepperHtml(lineId, line.qty)
+          : `<button class="btn-add" data-id="${lineId}" data-name="${item.name} (${selected})" data-price="${item.price}">Add</button>`;
+
+        return `
+          <li class="menu-list-item">
+            <div>
+              <div class="menu-item-name">${item.name}</div>
+              ${item.description ? `<div class="menu-item-desc">${item.description}</div>` : ''}
+              <select class="drink-option" data-drink-id="${item.id}">
+                ${item.options.map(option => `<option value="${option}" ${option === selected ? 'selected' : ''}>${option}</option>`).join('')}
+              </select>
+            </div>
+            <div class="menu-item-right">
+              <span class="menu-item-price">${formatNaira(item.price)}</span>
+              ${control}
+            </div>
+          </li>`;
+      }
+
       const line = cart.find(l => l.id === item.id);
       const control = line
         ? stepperHtml(item.id, line.qty)
@@ -92,6 +119,10 @@
         addToCart(btn.dataset.id, btn.dataset.name, Number(btn.dataset.price), 1);
         renderItems();
       });
+    });
+
+    itemsEl.querySelectorAll('.drink-option').forEach(select => {
+      select.addEventListener('change', () => renderItems());
     });
     itemsEl.querySelectorAll('.qty-stepper').forEach(stepper => {
       const id = stepper.dataset.id;
