@@ -934,6 +934,28 @@ button.size-option:hover {
   color: white;
 }
 
+
+.drink-option {
+  display: block;
+  width: 100%;
+  min-width: 140px;
+  margin-top: 8px;
+  padding: 9px 34px 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.drink-option:focus {
+  outline: 2px solid var(--noon-red);
+  outline-offset: 2px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {
