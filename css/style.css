@@ -935,25 +935,28 @@ button.size-option:hover {
 }
 
 
-.drink-option {
-  display: block;
-  width: 100%;
-  min-width: 140px;
-  margin-top: 8px;
-  padding: 9px 34px 9px 12px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
+.drink-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.drink-option:focus {
-  outline: 2px solid var(--noon-red);
-  outline-offset: 2px;
+.drink-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.drink-choice > span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.drink-choice .btn-add,
+.drink-choice .qty-stepper {
+  flex-shrink: 0;
 }
 
 /* ---------- Responsive ---------- */
