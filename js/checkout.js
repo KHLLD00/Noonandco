@@ -276,7 +276,7 @@
   }
 
   function openWhatsApp() {
-    const message = 'Hi Noon & Co, I'd like to place an order. I have attached my receipt with my order details.';
+    const message = "Hi Noon & Co, I'd like to place an order. I have attached my receipt with my order details.";
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
   }
 
