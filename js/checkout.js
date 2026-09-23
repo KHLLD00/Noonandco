@@ -123,38 +123,62 @@
     ctx.fillStyle = '#FBF5EE';
     ctx.fillRect(0, 0, width, height);
 
+    // Logo is drawn from the existing Noon & Co logo asset.
+    const logo = new Image();
+    logo.src = 'assets/logo-mark.png';
+
+    // Keep drawing synchronous so the receipt remains compatible with the
+    // existing canvas/blob flow. If the image has loaded, draw it; otherwise
+    // the text header remains as a safe fallback.
+    const drawLogo = (x, y, maxWidth, maxHeight, alpha) => {
+      if (!logo.naturalWidth || !logo.naturalHeight) return;
+      const scale = Math.min(maxWidth / logo.naturalWidth, maxHeight / logo.naturalHeight);
+      const w = logo.naturalWidth * scale;
+      const h = logo.naturalHeight * scale;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(logo, x - w / 2, y - h / 2, w, h);
+      ctx.restore();
+    };
+
+    // Header logo.
+    drawLogo(width / 2, 45, 150, 58, 1);
+
     ctx.fillStyle = '#221A16';
     ctx.textAlign = 'center';
     ctx.font = '800 42px "Arial", sans-serif';
-    ctx.fillText('Noon & Co', width / 2, 62);
+    ctx.fillText('Noon & Co', width / 2, 92);
 
     ctx.fillStyle = '#C41E1E';
     ctx.font = '700 20px "Arial", sans-serif';
-    ctx.fillText('ORDER RECEIPT', width / 2, 100);
+    ctx.fillText('ORDER RECEIPT', width / 2, 125);
 
     ctx.strokeStyle = '#D8CFC3';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(70, 132);
-    ctx.lineTo(width - 70, 132);
+    ctx.moveTo(70, 150);
+    ctx.lineTo(width - 70, 150);
     ctx.stroke();
+
+    // Center watermark, kept behind the receipt content.
+    drawLogo(width / 2, Math.round(height / 2), Math.min(width * 0.55, 500), Math.min(height * 0.28, 260), 0.055);
 
     ctx.textAlign = 'left';
     ctx.fillStyle = '#8A7A6E';
     ctx.font = '600 18px "Arial", sans-serif';
-    ctx.fillText(fulfillment === 'pickup' ? 'PICKUP' : 'DELIVERY', 70, 170);
+    ctx.fillText(fulfillment === 'pickup' ? 'PICKUP' : 'DELIVERY', 70, 185);
 
     ctx.textAlign = 'right';
-    ctx.fillText(new Date().toLocaleDateString('en-NG'), width - 70, 170);
+    ctx.fillText(new Date().toLocaleDateString('en-NG'), width - 70, 185);
 
     ctx.textAlign = 'left';
     ctx.fillStyle = '#221A16';
     ctx.font = '600 22px "Arial", sans-serif';
-    ctx.fillText('Item', 70, 215);
+    ctx.fillText('Item', 70, 230);
     ctx.textAlign = 'center';
-    ctx.fillText('Qty', width / 2, 215);
+    ctx.fillText('Qty', width / 2, 230);
     ctx.textAlign = 'right';
-    ctx.fillText('Amount', width - 70, 215);
+    ctx.fillText('Amount', width - 70, 230);
 
     let y = headerHeight;
     cart.forEach(line => {
