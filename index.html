@@ -4,19 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noon & Co — Abuja & Lagos Food Delivery</title>
-<meta name="description" content="Noon & Co is a virtual restaurant serving Abuja and Lagos. Order jollof, native rice, noodles, and combos for pickup or delivery.">
-<link rel="icon" href="data:,">
+<meta name="description" content="Noon & Co is a virtual restaurant serving Abuja and Lagos. Order jollof, native rice, noodles, combos, sides, and drinks for pickup or delivery.">
+<link rel="canonical" href="https://khlld00.github.io/Noonandco/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Noon & Co — Abuja & Lagos Food Delivery">
+<meta property="og:description" content="Home-cooked meals for pickup or delivery in Abuja and Lagos.">
+<meta property="og:url" content="https://khlld00.github.io/Noonandco/">
+<meta property="og:image" content="https://khlld00.github.io/Noonandco/assets/logo-mark.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/logo-mark.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" aria-label="Main navigation">
   <div class="wrap">
     <a href="#" class="nav-logo">
       <img src="assets/logo-mark.png" alt="Noon & Co">
       Noon & Co
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="primary-navigation">
       <li><a href="#menu">Menu</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#reviews">Reviews</a></li>
@@ -26,7 +33,7 @@
       <a href="cart.html" class="cart-btn" aria-label="View cart">
         Cart <span class="cart-count">0</span>
       </a>
-      <button class="nav-toggle" aria-label="Open menu">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
         <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
           <path d="M0 1H22" stroke="#221A16" stroke-width="2"/>
           <path d="M0 8H22" stroke="#221A16" stroke-width="2"/>
@@ -77,13 +84,14 @@
           <h2>A kitchen with no dining room</h2>
         </div>
         <p>Noon & Co runs as a virtual restaurant — every dish is cooked to order and sent out for pickup or delivery, nothing sits under a heat lamp waiting for a table that never fills.</p>
-        <p>Started in Abuja, now serving Lagos too, with a menu built around the meals people actually reorder: jollof, native rice, stir-fried noodles, and combos big enough for the whole table.</p>
+        <p>Started in Abuja, now serving Lagos too, with a menu built around the meals people actually reorder: jollof, native rice, stir-fried noodles, and combos big enough for the whole table. Our Abuja kitchen is in Wuse; delivery availability and the delivery fee are confirmed on WhatsApp.</p>
       </div>
       <ul class="about-list">
         <li><span>Service</span><span>Pickup & Delivery</span></li>
         <li><span>Cities</span><span>Abuja, Lagos</span></li>
         <li><span>Hours</span><span>9am – 9pm</span></li>
-        <li><span>Location</span><span>Wuse, Abuja</span></li>
+        <li><span>Abuja kitchen</span><span>Wuse, Abuja</span></li>
+        <li><span>Delivery fee</span><span>Confirmed on WhatsApp</span></li>
       </ul>
     </div>
   </div>
@@ -93,15 +101,15 @@
   <div class="wrap">
     <div class="section-head">
       <h2>From the menu</h2>
-      <p>A taste of what's cooking — the full menu with combos, sides, and drinks is one tap away.</p>
+      <p>Browse the menu by category, then open the full menu when you’re ready to order.</p>
     </div>
-    <div class="menu-tabs">
-      <button class="active">Meals</button>
-      <button>Noodles</button>
-      <button>Combos</button>
-      <button>Sides</button>
+    <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+      <button class="active" type="button" data-category="meals" role="tab" aria-selected="true">Meals</button>
+      <button type="button" data-category="noodles" role="tab" aria-selected="false">Noodles</button>
+      <button type="button" data-category="combos" role="tab" aria-selected="false">Combos</button>
+      <button type="button" data-category="sides" role="tab" aria-selected="false">Sides</button>
     </div>
-    <ul class="menu-list">
+    <ul class="menu-list" id="homepage-menu-preview" aria-live="polite">
       <li><span class="menu-item-name">Jollof Rice</span><span class="menu-item-price">₦3,000</span></li>
       <li><span class="menu-item-name">Fried Rice</span><span class="menu-item-price">₦3,000</span></li>
       <li><span class="menu-item-name">Coconut Rice</span><span class="menu-item-price">₦6,500</span></li>
@@ -145,15 +153,15 @@
       <ul class="contact-list">
         <li>
           <span class="contact-label">Phone / WhatsApp</span>
-          <span class="contact-value">0816 270 2096</span>
+          <a class="contact-value contact-link" href="tel:+2348162702096">0816 270 2096</a>
         </li>
         <li>
           <span class="contact-label">Location</span>
-          <span class="contact-value">Wuse, Abuja</span>
+          <span class="contact-value">Wuse, Abuja · Abuja kitchen</span>
         </li>
         <li>
           <span class="contact-label">Instagram</span>
-          <span class="contact-value">@noonandco.ng</span>
+          <a class="contact-value contact-link" href="https://instagram.com/noonandco.ng">@noonandco.ng</a>
         </li>
       </ul>
       <div class="hours-card">
@@ -161,6 +169,7 @@
         <div class="hours-row"><span>Monday – Sunday</span><span>9am – 9pm</span></div>
         <div class="hours-row"><span>Service</span><span>Pickup & Delivery</span></div>
         <div class="hours-row"><span>Cities</span><span>Abuja & Lagos</span></div>
+        <div class="hours-row"><span>Delivery fee</span><span>Confirmed on WhatsApp</span></div>
       </div>
     </div>
   </div>
@@ -175,6 +184,21 @@
 </footer>
 
 <script src="js/cart.js"></script>
+<script src="js/data.js"></script>
 <script src="js/main.js"></script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Noon & Co",
+  "url":"https://khlld00.github.io/Noonandco/",
+  "telephone":"+2348162702096",
+  "servesCuisine":"Nigerian",
+  "areaServed":["Abuja","Lagos"],
+  "openingHours":"Mo-Su 09:00-21:00",
+  "address":{"@type":"PostalAddress","addressLocality":"Wuse, Abuja","addressCountry":"NG",
+  "streetAddress":"Wuse, Abuja"}
+}
+</script>
 </body>
 </html>
