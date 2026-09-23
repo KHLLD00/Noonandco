@@ -90,6 +90,22 @@
     renderSummary();
   }
 
+  function showPhoneError(message) {
+    const phoneField = document.getElementById('customer-phone');
+    const phoneError = document.getElementById('phone-error');
+    phoneError.textContent = message;
+    phoneError.hidden = false;
+    phoneField.setAttribute('aria-invalid', 'true');
+  }
+
+  function clearPhoneError() {
+    const phoneField = document.getElementById('customer-phone');
+    const phoneError = document.getElementById('phone-error');
+    phoneError.textContent = '';
+    phoneError.hidden = true;
+    phoneField.removeAttribute('aria-invalid');
+  }
+
   function getCustomerDetails() {
     return {
       name: document.getElementById('customer-name').value.trim(),
@@ -337,15 +353,17 @@
 
     const details = getCustomerDetails();
     const normalizedPhone = normalizeNigerianPhone(details.phone);
+    clearPhoneError();
     if (!details.name || !details.phone || (fulfillment === 'delivery' && !details.address)) {
-      alert(fulfillment === 'delivery'
-        ? 'Please enter your name, phone number, and delivery address before continuing.'
-        : 'Please enter your name and phone number before continuing.');
+      if (!details.phone) {
+        showPhoneError('Please enter your phone number.');
+        document.getElementById('customer-phone').focus();
+      }
       return;
     }
 
     if (!normalizedPhone) {
-      alert('Please enter a valid Nigerian mobile number, such as 08012345678 or +2348012345678.');
+      showPhoneError('Please enter a valid Nigerian mobile number, e.g. 08012345678 or +2348012345678.');
       document.getElementById('customer-phone').focus();
       return;
     }
@@ -367,6 +385,8 @@
     link.download = `noon-and-co-receipt-${Date.now()}.png`;
     link.click();
   });
+
+  document.getElementById('customer-phone').addEventListener('input', clearPhoneError);
 
   document.getElementById('open-whatsapp').addEventListener('click', openWhatsApp);
 
