@@ -35,7 +35,7 @@
   const tabs = document.querySelectorAll('.menu-tabs button[data-category]');
 
   function renderHomepagePreview(city, categoryId = 'meals') {
-    if (!preview || !window.MENU_DATA) return;
+    if (!preview || typeof MENU_DATA === 'undefined') return;
 
     const categories = MENU_DATA[city].categories;
     const category = categories.find(c => c.id === categoryId) || categories[0];
