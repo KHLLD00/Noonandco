@@ -3,29 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu — Noon & Co</title>
+<title>Menu — Noon & Co Abuja & Lagos</title>
 <meta name="description" content="Full Noon & Co menu for Abuja and Lagos — meals, noodles, combos, sides, drinks, and party-size food bowls.">
-<link rel="icon" href="data:,">
+<link rel="canonical" href="https://khlld00.github.io/Noonandco/menu.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Menu — Noon & Co Abuja & Lagos">
+<meta property="og:description" content="Browse meals, noodles, combos, sides and drinks from Noon & Co.">
+<meta property="og:url" content="https://khlld00.github.io/Noonandco/menu.html">
+<meta property="og:image" content="https://khlld00.github.io/Noonandco/assets/logo-mark.png">
+<link rel="icon" href="assets/logo-mark.png">
 <link rel="stylesheet" href="css/style.css?v=20260918-drinks">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" aria-label="Main navigation">
   <div class="wrap">
     <a href="index.html" class="nav-logo">
       <img src="assets/logo-mark.png" alt="Noon & Co">
       Noon & Co
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="primary-navigation">
       <li><a href="menu.html">Menu</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#reviews">Reviews</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <a href="cart.html" class="cart-btn" aria-label="View cart">
-        Cart <span class="cart-count">0</span>
-      </a>
+      <a href="cart.html" class="cart-btn" aria-label="View cart">Cart <span class="cart-count">0</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+          <path d="M0 1H22" stroke="#221A16" stroke-width="2"/>
+          <path d="M0 8H22" stroke="#221A16" stroke-width="2"/>
+          <path d="M0 15H22" stroke="#221A16" stroke-width="2"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -43,7 +54,7 @@
 <section style="padding-top: 0;">
   <div class="wrap">
     <div class="menu-tabs" id="category-tabs"></div>
-    <p class="menu-note" id="category-note"></p>
+    <p class="menu-note" id="category-note"></p><p class="delivery-note">Delivery fee is confirmed on WhatsApp before your order is finalized.</p>
     <ul class="menu-list" id="menu-items"></ul>
   </div>
 </section>
@@ -64,6 +75,7 @@
 </footer>
 
 <script src="js/cart.js?v=20260918-drinks"></script>
+<script src="js/main.js?v=20260923-ux"></script>
 <script src="js/data.js?v=20260918-drinks"></script>
 <script src="js/menu.js?v=20260918-drinks"></script>
 </body>
