@@ -1138,6 +1138,23 @@ button:focus-visible {
   color: #6E6259;
   font-size: 12px;
 }
+
+.field-error {
+  display: block;
+  margin-top: 5px;
+  color: var(--noon-red-dark);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.field-error[hidden] {
+  display: none;
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--noon-red);
+  box-shadow: 0 0 0 2px rgba(196, 30, 30, 0.08);
+}
 .field input:invalid:not(:placeholder-shown),
 .field textarea:invalid:not(:placeholder-shown) {
   border-color: var(--noon-red);
