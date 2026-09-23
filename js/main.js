@@ -1,6 +1,7 @@
 // Shared navigation, city selection, and homepage menu preview.
+// This file is intentionally self-contained so homepage tabs do not depend on cart.js helpers.
 (function () {
-  const savedCity = getCity();
+  const savedCity = typeof getCity === 'function' ? getCity() : (localStorage.getItem('noon-city') || 'abuja');
 
   document.querySelectorAll('.city-toggle button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.city === savedCity);
@@ -37,7 +38,8 @@
   function renderHomepagePreview(city, categoryId = 'meals') {
     if (!preview || typeof MENU_DATA === 'undefined') return;
 
-    const categories = MENU_DATA[city].categories;
+    const cityData = MENU_DATA[city] || MENU_DATA.abuja;
+    const categories = cityData.categories;
     const category = categories.find(c => c.id === categoryId) || categories[0];
 
     tabs.forEach(btn => {
@@ -48,7 +50,8 @@
 
     preview.innerHTML = category.items.slice(0, 5).map(item => {
       const price = item.sizes ? Math.min(...item.sizes.map(s => s.price)) : item.price;
-      const label = item.sizes ? `From ${formatNaira(price)}` : formatNaira(price);
+      const naira = value => `₦${Number(value).toLocaleString('en-NG')}`;
+      const label = item.sizes ? `From ${naira(price)}` : naira(price);
       return `<li><span class="menu-item-name">${item.name}</span><span class="menu-item-price">${label}</span></li>`;
     }).join('');
   }
