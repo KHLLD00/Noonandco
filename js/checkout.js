@@ -15,6 +15,14 @@
   let fulfillment = 'pickup';
   let receiptBlobUrl = '';
 
+  function normalizeNigerianPhone(value) {
+    const digits = value.replace(/[^0-9+]/g, '');
+    if (/^0[789][01]\d{8}$/.test(digits)) return '+234' + digits.slice(1);
+    if (/^234[789][01]\d{8}$/.test(digits)) return '+' + digits;
+    if (/^\+234[789][01]\d{8}$/.test(digits)) return digits;
+    return '';
+  }
+
   function renderLines() {
     const cart = getCart();
 
@@ -97,11 +105,17 @@
     const ctx = canvas.getContext('2d');
 
     const width = 900;
-    const itemHeight = 62;
+    const itemLineHeight = 28;
+    const itemPadding = 26;
     const headerHeight = 250;
     const detailsHeight = fulfillment === 'delivery' ? 230 : 190;
     const footerHeight = 90;
-    const height = headerHeight + (cart.length * itemHeight) + detailsHeight + footerHeight;
+    const itemRows = cart.map(line => {
+      ctx.font = '600 21px Arial, sans-serif';
+      return Math.max(1, Math.ceil(ctx.measureText(line.name).width / 500));
+    });
+    const itemsHeight = itemRows.reduce((sum, rows) => sum + Math.max(itemLineHeight, rows * itemLineHeight) + itemPadding, 0);
+    const height = headerHeight + itemsHeight + detailsHeight + footerHeight;
 
     canvas.width = width;
     canvas.height = height;
@@ -146,8 +160,9 @@
     cart.forEach(line => {
       ctx.textAlign = 'left';
       ctx.fillStyle = '#221A16';
-      ctx.font = '600 21px "Arial", sans-serif';
-      ctx.fillText(line.name, 70, y);
+      ctx.font = '600 21px Arial, sans-serif';
+      const nameLines = wrapText(ctx, line.name, 500);
+      nameLines.forEach((nameLine, index) => ctx.fillText(nameLine, 70, y + index * itemLineHeight));
 
       ctx.textAlign = 'center';
       ctx.font = '500 21px "Arial", sans-serif';
@@ -163,7 +178,7 @@
       ctx.moveTo(70, y + 20);
       ctx.lineTo(width - 70, y + 20);
       ctx.stroke();
-      y += itemHeight;
+      y += Math.max(itemLineHeight, nameLines.length * itemLineHeight) + itemPadding;
     });
 
     y += 18;
@@ -261,15 +276,19 @@
   }
 
   function openWhatsApp() {
-    const message = 'Hi Noon & Co, I\'d like to place an order. Please see the attached receipt for my order details.';
+    const message = 'Hi Noon & Co, I'd like to place an order. I have attached my receipt with my order details.';
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
   }
 
   document.querySelectorAll('.fulfillment-toggle button').forEach(btn => {
     btn.addEventListener('click', () => {
       fulfillment = btn.dataset.fulfillment;
-      document.querySelectorAll('.fulfillment-toggle button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.fulfillment-toggle button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       addressField.style.display = fulfillment === 'delivery' ? 'block' : 'none';
     });
   });
@@ -293,6 +312,7 @@
     if (getCart().length === 0) return;
 
     const details = getCustomerDetails();
+    const normalizedPhone = normalizeNigerianPhone(details.phone);
     if (!details.name || !details.phone || (fulfillment === 'delivery' && !details.address)) {
       alert(fulfillment === 'delivery'
         ? 'Please enter your name, phone number, and delivery address before continuing.'
@@ -300,6 +320,13 @@
       return;
     }
 
+    if (!normalizedPhone) {
+      alert('Please enter a valid Nigerian mobile number, such as 08012345678 or +2348012345678.');
+      document.getElementById('customer-phone').focus();
+      return;
+    }
+
+    document.getElementById('customer-phone').value = normalizedPhone;
     openReceipt();
   });
 
